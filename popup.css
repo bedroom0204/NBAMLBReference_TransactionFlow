@@ -1,0 +1,245 @@
+/* Popup Styles (Flat Light Mode) */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  width: 600px;
+  min-height: 500px;
+  max-height: 600px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.popup-wrapper {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Header */
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  font-size: 18px;
+  background: #0284c7;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.header-brand h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.subtitle {
+  margin: 1px 0 0 0;
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #dcfce7;
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1px solid #bbf7d0;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+.status-text {
+  font-size: 0.7rem;
+  color: #15803d;
+  font-weight: 600;
+}
+
+/* Presets */
+.section-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.preset-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-btn {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chip-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+/* Input Playground */
+.input-section {
+  background: #ffffff;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-clear {
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.btn-clear:hover {
+  color: #ef4444;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+#input-player-name {
+  flex: 2;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+#input-player-id {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+#input-tx-text {
+  width: 100%;
+  height: 65px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+#input-player-name:focus,
+#input-player-id:focus,
+#input-tx-text:focus {
+  outline: none;
+  border-color: #0284c7;
+}
+
+.btn-visualize {
+  background: #0284c7;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-visualize:hover {
+  background: #0369a1;
+}
+
+/* Preview Section */
+.preview-section {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 10px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px 14px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px dashed #cbd5e1;
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+/* Footer */
+.popup-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.footer-link {
+  color: #0284c7;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}

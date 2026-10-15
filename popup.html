@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sports Reference Trade Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-wrapper">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="header-brand">
+        <div class="brand-icon">⚡</div>
+        <div>
+          <h2>Sports Trade Visualizer</h2>
+          <p class="subtitle">Timeline, Headshots & Visual Trade Flow</p>
+        </div>
+      </div>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Active</span>
+      </div>
+    </header>
+
+    <!-- Quick Presets -->
+    <section class="preset-section">
+      <div class="section-title">Quick Presets</div>
+      <div class="preset-chips">
+        <button class="chip-btn" id="btn-preset-josh">🏀 Josh Green (2024 6-Team Trade)</button>
+        <button class="chip-btn" id="btn-preset-soto">⚾ Juan Soto (2022 Blockbuster)</button>
+        <button class="chip-btn" id="btn-preset-kat">🏀 Towns / Randle (2024 3-Team Trade)</button>
+      </div>
+    </section>
+
+    <!-- Interactive Playground Input -->
+    <section class="input-section">
+      <div class="input-header">
+        <span class="section-title">Test Any Transaction</span>
+        <button class="btn-clear" id="btn-clear-input">Clear</button>
+      </div>
+      <div class="input-row">
+        <input type="text" id="input-player-name" placeholder="Player Name (e.g. Josh Green)" value="Josh Green">
+        <input type="text" id="input-player-id" placeholder="Player ID (e.g. greenjo02)" value="greenjo02">
+      </div>
+      <textarea id="input-tx-text" placeholder="Paste Basketball-Reference or Baseball-Reference transaction HTML/text here..."></textarea>
+      <button class="btn-visualize" id="btn-parse-run">
+        <span>Visualize Timeline</span>
+      </button>
+    </section>
+
+    <!-- Visualizer Result Container -->
+    <section class="preview-section" id="preview-area">
+      <div class="empty-state">
+        <p>Select a preset or paste transaction text to preview the timeline with trade flow and player headshots.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <span>Basketball-Reference & Baseball-Reference</span>
+      <a href="https://www.basketball-reference.com/players/g/greenjo02.html#all_transactions" target="_blank" class="footer-link">Open Josh Green Page ➔</a>
+    </footer>
+  </div>
+
+  <script src="team-colors.js"></script>
+  <script src="parser.js"></script>
+  <script src="visualizer.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports Reference Trade Visualizer — Demo</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f1f5f9;
+      color: #0f172a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .demo-navbar {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .demo-title-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .demo-logo {
+      font-size: 20px;
+      background: #0284c7;
+      color: #ffffff;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+    }
+    .demo-title-box h1 {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .demo-title-box p {
+      margin: 1px 0 0;
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+    .demo-install-guide {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: #334155;
+    }
+    .demo-container {
+      max-width: 1080px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+    .demo-preset-bar {
+      background: #ffffff;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .demo-preset-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #475569;
+    }
+    .demo-chip {
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .demo-chip:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+    .demo-chip.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+    .bref-mock-header {
+      background: #ffffff;
+      color: #111827;
+      padding: 14px 18px;
+      border-radius: 6px 6px 0 0;
+      border: 1px solid #e5e7eb;
+      border-bottom: 3px solid #c8102e;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .bref-mock-header h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+    .bref-mock-header .player-meta {
+      font-size: 0.82rem;
+      color: #4b5563;
+    }
+    .bref-wrapper {
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 0 0 6px 6px;
+      border: 1px solid #e5e7eb;
+      border-top: none;
+      margin-bottom: 24px;
+    }
+    .install-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-top: 20px;
+    }
+    .install-card h3 {
+      margin-top: 0;
+      color: #0284c7;
+      font-size: 1rem;
+    }
+    .step-list {
+      padding-left: 20px;
+      line-height: 1.7;
+      font-size: 0.88rem;
+      color: #334155;
+    }
+    .step-list code {
+      background: #f1f5f9;
+      color: #0284c7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="demo-navbar">
+    <div class="demo-title-box">
+      <div class="demo-logo">⚡</div>
+      <div>
+        <h1>Sports Reference Trade Visualizer</h1>
+        <p>Flat Light Design • Career Timeline • Labeled Flow Arrows • Player Headshots</p>
+      </div>
+    </div>
+    <div class="demo-install-guide">
+      Extension Path: <code>c:\UX\AI\ExtensionforTransaction</code>
+    </div>
+  </nav>
+
+  <div class="demo-container">
+    <!-- Presets -->
+    <div class="demo-preset-bar">
+      <span class="demo-preset-label">Sample Players:</span>
+      <button class="demo-chip active" id="chip-josh">🏀 Josh Green (2024 6-Team Mega Trade)</button>
+      <button class="demo-chip" id="chip-kd">🏀 Kevin Durant (7-Team Blockbuster)</button>
+      <button class="demo-chip" id="chip-4team">🏀 Josh Green (2026 4-Team Trade)</button>
+      <button class="demo-chip" id="chip-otto">🏀 Otto Porter Jr. (2019 CHI ⮂ WAS)</button>
+      <button class="demo-chip" id="chip-soto">⚾ Juan Soto (2022 Blockbuster)</button>
+      <button class="demo-chip" id="chip-kat">🏀 Karl-Anthony Towns (2024 3-Team Trade)</button>
+    </div>
+
+    <!-- Sports Reference Simulated View -->
+    <div class="bref-mock-header">
+      <h2 id="demo-player-title">Josh Green</h2>
+      <span class="player-meta" id="demo-player-meta">Position: Shooting Guard and Small Forward ▪ Shoots: Right ▪ Team: Charlotte Hornets</span>
+    </div>
+
+    <div class="bref-wrapper">
+      <div id="demo-visualizer-mount"></div>
+    </div>
+
+    <!-- Installation Steps -->
+    <div class="install-card">
+      <h3>Installation Steps in Google Chrome:</h3>
+      <ol class="step-list">
+        <li>Open Chrome and navigate to <code>chrome://extensions/</code></li>
+        <li>Toggle ON <strong>Developer mode</strong> in the top-right corner.</li>
+        <li>Click <strong>Load unpacked</strong> in the top-left corner.</li>
+        <li>Select the directory: <code>C:\UX\AI\ExtensionforTransaction</code></li>
+        <li>Done! Visit any player page on Basketball-Reference or Baseball-Reference (e.g. <a href="https://www.basketball-reference.com/players/g/greenjo02.html#all_transactions" target="_blank" style="color:#0284c7;">Josh Green Transactions</a>) to view the automated visual timeline!</li>
+      </ol>
+    </div>
+  </div>
+
+  <script src="team-colors.js"></script>
+  <script src="parser.js"></script>
+  <script src="visualizer.js"></script>
+  <script>
+    const SAMPLES = {
+      josh: {
+        name: "Josh Green",
+        id: "greenjo02",
+        meta: "Position: Shooting Guard and Small Forward ▪ Shoots: Right ▪ Team: Charlotte Hornets",
+        html: `
+          <p><strong>November 18, 2020</strong>: Drafted by the <a data-attr-to="DAL" href="/teams/DAL/2020.html">Dallas Mavericks</a> in the 1st round (18th pick) of the 2020 NBA Draft.</p>
+          <p><strong>November 30, 2020</strong>: Signed a multi-year contract with the <a data-attr-to="DAL" href="/teams/DAL/2021.html">Dallas Mavericks</a>.</p>
+          <p><strong>February 17, 2021</strong>: Assigned to the <a href="/gleague/teams/SLC/2021.html">Salt Lake City Stars</a> of the G-League.</p>
+          <p><strong>March 6, 2021</strong>: Recalled from the <a href="/gleague/teams/SLC/2021.html">Salt Lake City Stars</a> of the G-League.</p>
+          <p><strong>October 23, 2023</strong>: Signed a contract extension with the <a data-attr-to="DAL" href="/teams/DAL/2024.html">Dallas Mavericks</a>.</p>
+          <p><strong>July 6, 2024</strong>: As part of a 6-team trade, traded by the <a data-attr-from="DAL" href="/teams/DAL/2025.html">Dallas Mavericks</a> to the <a data-attr-to="CHO" href="/teams/CHO/2025.html">Charlotte Hornets</a>; the <a data-attr-from="CHO" href="/teams/CHO/2025.html">Charlotte Hornets</a> traded a 2025 2nd round draft pick (<a href="/players/b/broomjo01.html">Johni Broome</a> was later selected) to the <a data-attr-to="DAL" href="/teams/DAL/2025.html">Dallas Mavericks</a>; the <a data-attr-from="CHO" href="/teams/CHO/2025.html">Charlotte Hornets</a> traded cash to the <a data-attr-to="DEN" href="/teams/DEN/2025.html">Denver Nuggets</a>; the <a data-attr-from="DAL" href="/teams/DAL/2025.html">Dallas Mavericks</a> traded a 2031 2nd round draft pick to the <a data-attr-to="PHI" href="/teams/PHI/2025.html">Philadelphia 76ers</a>; the <a data-attr-from="DEN" href="/teams/DEN/2025.html">Denver Nuggets</a> traded <a href="/players/j/jacksre01.html">Reggie Jackson</a>, a 2029 2nd round draft pick and a 2030 2nd round draft pick to the <a data-attr-to="CHO" href="/teams/CHO/2025.html">Charlotte Hornets</a>; the <a data-attr-from="DEN" href="/teams/DEN/2025.html">Denver Nuggets</a> traded a 2025 2nd round draft pick (<a href="/players/t/tooheal01.html">Alex Toohey</a> was later selected) to the <a data-attr-to="MIN" href="/teams/MIN/2025.html">Minnesota Timberwolves</a>; the <a data-attr-from="GSW" href="/teams/GSW/2025.html">Golden State Warriors</a> traded <a href="/players/t/thompkl01.html">Klay Thompson</a> to the <a data-attr-to="DAL" href="/teams/DAL/2025.html">Dallas Mavericks</a>; the <a data-attr-from="GSW" href="/teams/GSW/2025.html">Golden State Warriors</a> traded cash and a 2031 2nd round draft pick to the <a data-attr-to="MIN" href="/teams/MIN/2025.html">Minnesota Timberwolves</a>; the <a data-attr-from="MIN" href="/teams/MIN/2025.html">Minnesota Timberwolves</a> traded <a href="/players/a/anderky01.html">Kyle Anderson</a> to the <a data-attr-to="GSW" href="/teams/GSW/2025.html">Golden State Warriors</a>; and the <a data-attr-from="PHI" href="/teams/PHI/2025.html">Philadelphia 76ers</a> traded <a href="/players/h/hieldbu01.html">Buddy Hield</a> to the <a data-attr-to="GSW" href="/teams/GSW/2025.html">Golden State Warriors</a>.</p>
+        `
+      },
+      fourteam: {
+        name: "Josh Green (2026 4-Team Trade)",
+        id: "greenjo02",
+        meta: "Position: Shooting Guard ▪ Shoots: Right ▪ Team: Minnesota Timberwolves",
+        html: `
+          <p><strong>July 10, 2026</strong>: As part of a 4-team trade, traded by the <a data-attr-from="CHO" href="/teams/CHO/2027.html">Charlotte Hornets</a> with <a href="/players/b/ballla01.html">LaMelo Ball</a> to the <a data-attr-to="MIN" href="/teams/MIN/2027.html">Minnesota Timberwolves</a>; the <a data-attr-from="BRK" href="/teams/BRK/2027.html">Brooklyn Nets</a> traded <a href="/players/c/claxtni01.html">Nicolas Claxton</a> to the <a data-attr-to="CHI" href="/teams/CHI/2027.html">Chicago Bulls</a>; the <a data-attr-from="BRK" href="/teams/BRK/2027.html">Brooklyn Nets</a> traded <a href="/players/e/evansis01.html">Isaiah Evans</a> to the <a data-attr-to="MIN" href="/teams/MIN/2027.html">Minnesota Timberwolves</a>; the <a data-attr-from="CHI" href="/teams/CHI/2027.html">Chicago Bulls</a> traded <a href="/players/g/gueyemo01.html">Mouhamadou Gueye</a> to the <a data-attr-to="CHO" href="/teams/CHO/2027.html">Charlotte Hornets</a>; the <a data-attr-from="MIN" href="/teams/MIN/2027.html">Minnesota Timberwolves</a> traded <a href="/players/j/jeffejo01.html">Joshua Jefferson</a> and <a href="/players/r/randlju01.html">Julius Randle</a> to the <a data-attr-to="BRK" href="/teams/BRK/2027.html">Brooklyn Nets</a>; and the <a data-attr-from="MIN" href="/teams/MIN/2027.html">Minnesota Timberwolves</a> traded <a href="/players/r/reidna01.html">Naz Reid</a>, <a href="/players/s/spagnma01.html">Matteo Spagnolo</a>, a 2028 1st round draft pick, a 2029 1st round draft pick and a 2029 2nd round draft pick to the <a data-attr-to="CHO" href="/teams/CHO/2027.html">Charlotte Hornets</a>.</p>
+        `
+      },
+      otto: {
+        name: "Otto Porter Jr.",
+        id: "porteot01",
+        meta: "Position: Small Forward and Power Forward ▪ Shoots: Right ▪ Teams: Wizards, Bulls, Magic, Warriors, Raptors",
+        html: `
+          <p><strong>June 27, 2013</strong>: Drafted by the <a data-attr-to="WAS" href="/teams/WAS/2014.html">Washington Wizards</a> in the 1st round (3rd pick) of the 2013 NBA Draft.</p>
+          <p><strong>July 8, 2013</strong>: Signed a multi-year contract with the <a data-attr-to="WAS" href="/teams/WAS/2014.html">Washington Wizards</a>.</p>
+          <p><strong>July 13, 2017</strong>: Signed a multi-year contract with the <a data-attr-to="WAS" href="/teams/WAS/2018.html">Washington Wizards</a>.</p>
+          <p><strong>February 6, 2019</strong>: Traded by the <a data-attr-from="WAS" href="/teams/WAS/2019.html">Washington Wizards</a> to the <a data-attr-to="CHI" href="/teams/CHI/2019.html">Chicago Bulls</a> for <a href="/players/p/parkeja01.html">Jabari Parker</a>, <a href="/players/p/portibo01.html">Bobby Portis</a> and a 2023 2nd round draft pick.</p>
+          <p><strong>March 25, 2021</strong>: Traded by the <a data-attr-from="CHI" href="/teams/CHI/2021.html">Chicago Bulls</a> with <a href="/players/c/cartewe01.html">Wendell Carter Jr.</a>, a 2021 1st round draft pick and a 2023 1st round draft pick to the <a data-attr-to="ORL" href="/teams/ORL/2021.html">Orlando Magic</a> for <a href="/players/a/aminual01.html">Al-Farouq Aminu</a> and <a href="/players/v/vucevni01.html">Nikola Vučević</a>.</p>
+        `
+      },
+      soto: {
+        name: "Juan Soto",
+        id: "sotoju01",
+        meta: "Position: Rightfielder ▪ Bats: Left ▪ Throws: Right ▪ Team: New York Mets",
+        html: `
+          <p><strong>July 2, 2015:</strong> Signed by the <a href="/teams/WSN/2015.shtml">Washington Nationals</a> as an amateur free agent.</p>
+          <p><strong>August 2, 2022:</strong> Traded by the <a href="/teams/WSN/2022.shtml">Washington Nationals</a> with <a href="/players/b/belljo02.shtml">Josh Bell</a> to the <a href="/teams/SDP/2022.shtml">San Diego Padres</a> for <a href="/register/player.fcgi?id=susana000jar">Jarlin Susana</a> (minors), <a href="/players/a/abramcj01.shtml">CJ Abrams</a>, <a href="/players/g/gorema01.shtml">MacKenzie Gore</a>, <a href="/players/h/hassero02.shtml">Robert Hassell III</a>, <a href="/players/v/voitlu01.shtml">Luke Voit</a> and <a href="/players/w/woodja03.shtml">James Wood</a>.</p>
+          <p><strong>December 7, 2023:</strong> Traded by the <a href="/teams/SDP/2023.shtml">San Diego Padres</a> with <a href="/players/g/grishtr01.shtml">Trent Grisham</a> to the <a href="/teams/NYY/2023.shtml">New York Yankees</a> for <a href="/players/b/britojh01.shtml">Jhony Brito</a>, <a href="/players/h/higasky01.shtml">Kyle Higashioka</a>, <a href="/players/k/kingmi01.shtml">Michael King</a>, <a href="/players/t/thorpdr01.shtml">Drew Thorpe</a> and <a href="/players/v/vasqura02.shtml">Randy Vásquez</a>.</p>
+          <p><strong>December 11, 2024:</strong> Signed as a Free Agent with the <a href="/teams/NYM/2024.shtml">New York Mets</a>.</p>
+        `
+      },
+      kat: {
+        name: "Karl-Anthony Towns",
+        id: "townska01",
+        meta: "Position: Center and Power Forward ▪ Shoots: Right ▪ Team: New York Knicks",
+        html: `
+          <p><strong>June 25, 2015:</strong> Drafted by the <a data-attr-to="MIN" href="/teams/MIN/2015.html">Minnesota Timberwolves</a> in the 1st round (1st pick) of the 2015 NBA Draft.</p>
+          <p><strong>July 7, 2015:</strong> Signed a multi-year contract with the <a data-attr-to="MIN" href="/teams/MIN/2016.html">Minnesota Timberwolves</a>.</p>
+          <p><strong>September 23, 2018:</strong> Signed a contract extension with the <a data-attr-to="MIN" href="/teams/MIN/2019.html">Minnesota Timberwolves</a>.</p>
+          <p><strong>July 7, 2022:</strong> Signed a multi-year contract extension with the <a data-attr-to="MIN" href="/teams/MIN/2023.html">Minnesota Timberwolves</a>.</p>
+          <p><strong>October 2, 2024:</strong> As part of a 3-team trade, traded by the <a data-attr-from="MIN" href="/teams/MIN/2025.html">Minnesota Timberwolves</a> to the <a data-attr-to="NYK" href="/teams/NYK/2025.html">New York Knicks</a>; the <a data-attr-from="NYK" href="/teams/NYK/2025.html">New York Knicks</a> traded <a href="/players/d/dapoudu01.html">Pacôme Dadiet</a>, cash and a 2025 2nd round draft pick to the <a data-attr-to="CHO" href="/teams/CHO/2025.html">Charlotte Hornets</a>; the <a data-attr-from="NYK" href="/teams/NYK/2025.html">New York Knicks</a> traded <a href="/players/d/divinja01.html">Donte DiVincenzo</a>, <a href="/players/r/randlju01.html">Julius Randle</a>, <a href="/players/b/bateske01.html">Keita Bates-Diop</a> and a 2025 1st round draft pick to the <a data-attr-to="MIN" href="/teams/MIN/2025.html">Minnesota Timberwolves</a>; and the <a data-attr-from="CHO" href="/teams/CHO/2025.html">Charlotte Hornets</a> traded <a href="/players/n/nnikije01.html">James Nnaji</a> to the <a data-attr-to="NYK" href="/teams/NYK/2025.html">New York Knicks</a>.</p>
+        `
+      },
+      kd: {
+        name: "Kevin Durant",
+        id: "duranke01",
+        meta: "Position: Power Forward and Small Forward ▪ Shoots: Right ▪ Teams: SuperSonics, Thunder, Warriors, Nets, Suns, Rockets",
+        html: `
+          <p><strong>June 28, 2007:</strong> Drafted by the <a data-attr-to="SEA" href="/teams/SEA/2008.html">Seattle SuperSonics</a> in the 1st round (2nd pick) of the 2007 NBA Draft.</p>
+          <p><strong>July 7, 2019:</strong> As part of a sign-and-trade, traded by the <a data-attr-from="GSW" href="/teams/GSW/2020.html">Golden State Warriors</a> with a 2020 1st round draft pick to the <a data-attr-to="BRK" href="/teams/BRK/2020.html">Brooklyn Nets</a> for <a href="/players/r/russeda01.html">D'Angelo Russell</a>, <a href="/players/n/napiesh01.html">Shabazz Napier</a> and <a href="/players/g/grahatr01.html">Treveon Graham</a>.</p>
+          <p><strong>February 9, 2023:</strong> As part of a 4-team trade, traded by the <a data-attr-from="BRK" href="/teams/BRK/2023.html">Brooklyn Nets</a> with <a href="/players/w/warretj01.html">T.J. Warren</a> to the <a data-attr-to="PHO" href="/teams/PHO/2023.html">Phoenix Suns</a> for <a href="/players/b/bridgmi01.html">Mikal Bridges</a>, <a href="/players/j/johnsca02.html">Cameron Johnson</a>, a 2023 1st round draft pick, a 2025 1st round draft pick, a 2027 1st round draft pick, a 2028 1st round draft pick and a 2029 1st round draft pick.</p>
+          <p><strong>July 6, 2026:</strong> As part of a 7-team trade, traded by the <a data-attr-from="PHO" href="/teams/PHO/2027.html">Phoenix Suns</a> to the <a data-attr-to="HOU" href="/teams/HOU/2027.html">Houston Rockets</a>; the <a data-attr-from="HOU" href="/teams/HOU/2027.html">Houston Rockets</a> traded <a href="/players/b/brookdi01.html">Dillon Brooks</a>, <a href="/players/g/greenja05.html">Jalen Green</a>, <a href="/players/m/maluakh01.html">Khaman Maluach</a>, a 2026 2nd round draft pick (<a href="/players/n/nicket01.html">Tyler Nickel</a> was later selected) and a 2032 2nd round draft pick to the <a data-attr-to="PHO" href="/teams/PHO/2027.html">Phoenix Suns</a>; the <a data-attr-from="MIN" href="/teams/MIN/2027.html">Minnesota Timberwolves</a> traded <a href="/players/f/flemira01.html">Rasheer Fleming</a> to the <a data-attr-to="PHO" href="/teams/PHO/2027.html">Phoenix Suns</a>; the <a data-attr-from="PHO" href="/teams/PHO/2027.html">Phoenix Suns</a> traded a 2026 2nd round draft pick (<a href="/players/i/ischeck01.html">Vsevolod Ischenko</a> was later selected) and a 2032 2nd round draft pick to the <a data-attr-to="MIN" href="/teams/MIN/2027.html">Minnesota Timberwolves</a>; the <a data-attr-from="GSW" href="/teams/GSW/2027.html">Golden State Warriors</a> traded <a href="/players/b/breako01.html">Koby Brea</a> to the <a data-attr-to="PHO" href="/teams/PHO/2027.html">Phoenix Suns</a>; the <a data-attr-from="PHO" href="/teams/PHO/2027.html">Phoenix Suns</a> traded <a href="/players/t/tooheal01.html">Alex Toohey</a> to the <a data-attr-to="GSW" href="/teams/GSW/2027.html">Golden State Warriors</a>; the <a data-attr-from="ATL" href="/teams/ATL/2027.html">Atlanta Hawks</a> traded <a href="/players/p/plowdda01.html">Daeqwon Plowden</a> to the <a data-attr-to="PHO" href="/teams/PHO/2027.html">Phoenix Suns</a>; the <a data-attr-from="ATL" href="/teams/ATL/2027.html">Atlanta Hawks</a> traded <a href="/players/c/capelcl01.html">Clint Capela</a> to the <a data-attr-to="HOU" href="/teams/HOU/2027.html">Houston Rockets</a>; the <a data-attr-from="HOU" href="/teams/HOU/2027.html">Houston Rockets</a> traded <a href="/players/r/roddyda01.html">David Roddy</a>, cash and a 2031 2nd round draft pick to the <a data-attr-to="ATL" href="/teams/ATL/2027.html">Atlanta Hawks</a>; the <a data-attr-from="HOU" href="/teams/HOU/2027.html">Houston Rockets</a> traded <a href="/players/m/mashaja01.html">Jahmai Mashack</a> to the <a data-attr-to="GSW" href="/teams/GSW/2027.html">Golden State Warriors</a>; the <a data-attr-from="HOU" href="/teams/HOU/2027.html">Houston Rockets</a> traded a 2026 2nd round draft pick (<a href="/players/b/bilodty01.html">Tyler Bilodeau</a> was later selected) and a 2030 2nd round draft pick to the <a data-attr-to="BRK" href="/teams/BRK/2027.html">Brooklyn Nets</a>; the <a data-attr-from="LAL" href="/teams/LAL/2027.html">Los Angeles Lakers</a> traded <a href="/players/z/zikarro01.html">Rocco Zikarsky</a> and cash to the <a data-attr-to="MIN" href="/teams/MIN/2027.html">Minnesota Timberwolves</a>; and the <a data-attr-from="BRK" href="/teams/BRK/2027.html">Brooklyn Nets</a> traded <a href="/players/t/thierad01.html">Adou Thiero</a> to the <a data-attr-to="LAL" href="/teams/LAL/2027.html">Los Angeles Lakers</a>.</p>
+        `
+      }
+    };
+
+    function loadSample(key) {
+      const sample = SAMPLES[key];
+      document.getElementById("demo-player-title").innerText = sample.name;
+      document.getElementById("demo-player-meta").innerText = sample.meta;
+
+      const entries = TransactionParser.parseTransactionsSection(sample.html, sample.name, sample.id);
+      const mount = document.getElementById("demo-visualizer-mount");
+      mount.innerHTML = TransactionVisualizer.renderTimelineApp(entries, sample.name, sample.id);
+
+      TransactionVisualizer.bindEvents(mount);
+    }
+
+    document.getElementById("chip-josh").addEventListener("click", function() {
+      document.querySelectorAll(".demo-chip").forEach(c => c.classList.remove("active"));
+      this.classList.add("active");
+      loadSample("josh");
+    });
+
+    document.getElementById("chip-kd").addEventListener("click", function() {
+      document.querySelectorAll(".demo-chip").forEach(c => c.classList.remove("active"));
+      this.classList.add("active");
+      loadSample("kd");
+    });
+
+    document.getElementById("chip-4team").addEventListener("click", function() {
+      document.querySelectorAll(".demo-chip").forEach(c => c.classList.remove("active"));
+      this.classList.add("active");
+      loadSample("fourteam");
+    });
+
+    document.getElementById("chip-otto").addEventListener("click", function() {
+      document.querySelectorAll(".demo-chip").forEach(c => c.classList.remove("active"));
+      this.classList.add("active");
+      loadSample("otto");
+    });
+
+    document.getElementById("chip-soto").addEventListener("click", function() {
+      document.querySelectorAll(".demo-chip").forEach(c => c.classList.remove("active"));
+      this.classList.add("active");
+      loadSample("soto");
+    });
+
+    document.getElementById("chip-kat").addEventListener("click", function() {
+      document.querySelectorAll(".demo-chip").forEach(c => c.classList.remove("active"));
+      this.classList.add("active");
+      loadSample("kat");
+    });
+
+    loadSample("josh");
+  </script>
+</body>
+</html>
