@@ -241,13 +241,14 @@ const TransactionVisualizer = (function () {
    * Render Non-overlapping SVG Flow: Single Edge per Pair with Guaranteed Arrowheads & Side-Offset Cards
    */
   function renderTradeFlowSVG(trade, uniqueId = "stv-flow") {
-    if (!trade.transfers || trade.transfers.length === 0) return "";
+    if (!trade || !trade.transfers || trade.transfers.length === 0) return "";
 
     const teams = trade.teams || [];
     const n = teams.length;
-    if (n === 0) return "";
+    if (n < 2) return "";
 
     const pairs = groupTransfersByPair(trade.transfers);
+    if (!pairs || pairs.length === 0) return "";
 
     const svgWidth = n <= 2 ? 880 : (n <= 4 ? 980 : (n <= 6 ? 1200 : 1360));
     const svgHeight = n <= 2 ? 280 : (n <= 4 ? 800 : (n <= 6 ? 1040 : 1240));
@@ -481,13 +482,17 @@ const TransactionVisualizer = (function () {
       }
       // Re-verify safety clearance from all team nodes
       cardsList.forEach((c) => {
+        if (!c || isNaN(c.cardX) || isNaN(c.cardY)) return;
         teams.forEach((t) => {
+          if (!t) return;
           const node = nodeCoords[t.name];
-          if (!node) return;
+          if (!node || isNaN(node.x) || isNaN(node.y)) return;
           const dx = c.cardX - node.x;
           const dy = c.cardY - node.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const minClearance = nodeRadius + Math.max(c.cardW, c.cardH) / 2 + 18;
+          const cW = isNaN(c.cardW) ? 200 : c.cardW;
+          const cH = isNaN(c.cardH) ? 100 : c.cardH;
+          const minClearance = nodeRadius + Math.max(cW, cH) / 2 + 18;
           if (dist < minClearance) {
             const push = minClearance - (dist || 1);
             const pushX = dist > 1 ? (dx / dist) : (c.cardX >= centerX ? 1 : -1);
@@ -502,8 +507,11 @@ const TransactionVisualizer = (function () {
     // Safety boundary clamping: ensure no card can ever exceed the SVG viewport edges
     const pad = 18;
     cardsList.forEach((c) => {
-      c.cardX = Math.max(c.cardW / 2 + pad, Math.min(svgWidth - c.cardW / 2 - pad, c.cardX));
-      c.cardY = Math.max(c.cardH / 2 + pad, Math.min(svgHeight - c.cardH / 2 - pad, c.cardY));
+      if (!c) return;
+      const cW = isNaN(c.cardW) ? 200 : c.cardW;
+      const cH = isNaN(c.cardH) ? 100 : c.cardH;
+      c.cardX = Math.max(cW / 2 + pad, Math.min(svgWidth - cW / 2 - pad, isNaN(c.cardX) ? centerX : c.cardX));
+      c.cardY = Math.max(cH / 2 + pad, Math.min(svgHeight - cH / 2 - pad, isNaN(c.cardY) ? centerY : c.cardY));
     });
 
     cardsList.forEach((c) => {
@@ -579,18 +587,23 @@ const TransactionVisualizer = (function () {
     entries.forEach((entry, idx) => {
       let tradeDetailsHtml = "";
       if (entry.isTrade) {
-        tradeDetailsHtml = `
-          <div class="stv-trade-content-box">
-            <!-- Flow Diagram: 1 Edge per Team Pair with Guaranteed Double/Single Arrows -->
-            ${renderTradeFlowSVG(entry, "trade-" + idx)}
-
-            <!-- Team IN / OUT Ledger Cards -->
-            <div class="stv-ledger-block">
-              <div class="stv-block-label">Team Breakdown (Gave Up / Received)</div>
-              ${renderTradeCards(entry)}
-            </div>
-          </div>
-        `;
+        try {
+          const flowHtml = renderTradeFlowSVG(entry, "trade-" + idx);
+          const cardsHtml = renderTradeCards(entry);
+          if (flowHtml || cardsHtml) {
+            tradeDetailsHtml = `
+              <div class="stv-trade-content-box">
+                ${flowHtml}
+                <div class="stv-ledger-block">
+                  <div class="stv-block-label">Team Breakdown (Gave Up / Received)</div>
+                  ${cardsHtml}
+                </div>
+              </div>
+            `;
+          }
+        } catch (err) {
+          console.warn("[Sports Trade Visualizer] Skipped trade flow render on error:", err);
+        }
       }
 
       const teamTag = entry.team

@@ -263,13 +263,14 @@ const TransactionParser = (function () {
     });
 
     const teamCount = Object.keys(teamsMap).length;
+    const isValidTrade = teamCount >= 2 && transfers.length > 0;
     const tradeLabel = teamCount > 2 ? `${teamCount}-Team Trade` : "Trade";
 
     return {
       date,
-      type: "trade",
-      label: tradeLabel,
-      isTrade: true,
+      type: isValidTrade ? "trade" : "other",
+      label: isValidTrade ? tradeLabel : "Transaction",
+      isTrade: isValidTrade,
       teams: Object.values(teamsMap),
       transfers,
       teamLedger,
