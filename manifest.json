@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Sports Reference Trade Visualizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Transform complex NBA & MLB transaction text on Sports Reference into intuitive single-edge visual trade flows and career timelines.",
   "icons": {
     "16": "icons/icon16.png",

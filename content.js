@@ -3,7 +3,10 @@
  */
 
 (function () {
-  console.log("[Sports Trade Visualizer] Content script initialized.");
+  const STV_VERSION = (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.getManifest)
+    ? chrome.runtime.getManifest().version
+    : "dev";
+  console.log("[Sports Trade Visualizer] Content script initialized. v" + STV_VERSION);
 
   let isInitialized = false;
 
