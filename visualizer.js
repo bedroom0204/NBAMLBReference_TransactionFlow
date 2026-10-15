@@ -95,9 +95,11 @@ const TransactionVisualizer = (function () {
       nameContent = `<span class="stv-asset-main">${mainHtml}</span>`;
     }
 
+    const iconBadge = avatarHtml || `<span class="stv-asset-icon">${icon}</span>`;
+
     return `
       <span class="stv-asset-item ${typeClass} ${asset.isCurrentPlayer ? 'stv-is-current' : ''}" title="${asset.name || ''}">
-        ${avatarHtml || `<span class="stv-asset-icon">${icon}</span>`}
+        ${iconBadge}
         <span class="stv-asset-name">${nameContent}</span>
         ${currentBadge}
       </span>
@@ -385,7 +387,7 @@ const TransactionVisualizer = (function () {
         headerBadgeText = `${t2Code} ──► ${t1Code}`;
       }
 
-      // Description Card Side-Offset ("偏側一點，不擋箭頭")
+      // Description Card Side-Offset (Offset to the side to keep arrow visible)
       const idxDiff = (c1.index !== undefined && c2.index !== undefined)
         ? Math.abs(c1.index - c2.index)
         : 1;
@@ -418,7 +420,7 @@ const TransactionVisualizer = (function () {
       }
 
       if (n <= 2) {
-        // For 2 teams (WAS ⮂ CHI): card is offset above the horizontal line
+        // For 2 teams (WAS <-> CHI): card is offset above the horizontal line
         cardY = midChordY - 68;
       } else if (isPerimeter) {
         // Perimeter edges: offset OUTWARD into open space outside the polygon
@@ -492,6 +494,8 @@ const TransactionVisualizer = (function () {
             const pushY = dist > 1 ? (dy / dist) : (c.cardY >= centerY ? 1 : -1);
             c.cardX += pushX * push;
             c.cardY += pushY * push;
+          }
+        });
       });
     }
 
@@ -578,7 +582,7 @@ const TransactionVisualizer = (function () {
         tradeDetailsHtml = `
           <div class="stv-trade-content-box">
             <!-- Flow Diagram: 1 Edge per Team Pair with Guaranteed Double/Single Arrows -->
-            ${renderTradeFlowSVG(entry, `trade-${idx}`)}
+            ${renderTradeFlowSVG(entry, "trade-" + idx)}
 
             <!-- Team IN / OUT Ledger Cards -->
             <div class="stv-ledger-block">
